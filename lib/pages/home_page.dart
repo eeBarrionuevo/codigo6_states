@@ -1,9 +1,14 @@
 import 'package:codigo6_states/pages/register_page.dart';
+import 'package:codigo6_states/providers/example_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ExampleProvider exampleProvider =
+        Provider.of<ExampleProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
@@ -30,6 +35,19 @@ class HomePage extends StatelessWidget {
             title: Text("Nombre del item"),
             subtitle: Text("Descripción del item"),
           ),
+          Consumer<ExampleProvider>(
+            builder: (context, provider, _) {
+              return Text(
+                provider.contador.toString(),
+                style: TextStyle(
+                  fontSize: 30.0,
+                ),
+              );
+            },
+          ),
+          // Text(
+          //   context.watch<ExampleProvider>().contador.toString(),
+          // ),
         ],
       ),
     );
