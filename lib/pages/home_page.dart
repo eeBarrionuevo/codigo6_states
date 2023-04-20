@@ -47,6 +47,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Consumer<PostProvider>(
         builder: (context, provider, _) {
+          if (provider.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return Text(provider.posts.toString());
         },
       ),
