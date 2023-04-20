@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codigo6_states/pages/register_page.dart';
 import 'package:codigo6_states/providers/example_provider.dart';
+import 'package:codigo6_states/providers/note_provider.dart';
 import 'package:codigo6_states/providers/person_provider.dart';
 import 'package:codigo6_states/providers/post_provider.dart';
 import 'package:codigo6_states/services/remote/api_service.dart';
@@ -20,6 +21,10 @@ class _HomePageState extends State<HomePage> {
       PostProvider postProvider =
           Provider.of<PostProvider>(context, listen: false);
       postProvider.getPosts2();
+
+      NoteProvider noteProvider =
+          Provider.of<NoteProvider>(context, listen: false);
+      noteProvider.getNotes();
     });
   }
 
@@ -45,19 +50,37 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
-      body: Consumer<PostProvider>(
+      // body: Consumer<PostProvider>(
+      //   builder: (context, provider, _) {
+      //     if (provider.isLoading) {
+      //       return const Center(
+      //         child: CircularProgressIndicator(),
+      //       );
+      //     }
+      //     return ListView.builder(
+      //       itemCount: provider.posts.length,
+      //       itemBuilder: (context, index) {
+      //         return ListTile(
+      //           title: Text(provider.posts[index]["title"]),
+      //           subtitle: Text(provider.posts[index]["body"]),
+      //         );
+      //       },
+      //     );
+      //   },
+      // ),
+      body: Consumer<NoteProvider>(
         builder: (context, provider, _) {
-          if (provider.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+          // if (provider.isLoading) {
+          //   return const Center(
+          //     child: CircularProgressIndicator(),
+          //   );
+          // }
           return ListView.builder(
-            itemCount: provider.posts.length,
+            itemCount: provider.notes.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(provider.posts[index]["title"]),
-                subtitle: Text(provider.posts[index]["body"]),
+                title: Text(provider.notes[index]["title"]),
+                subtitle: Text(provider.notes[index]["description"]),
               );
             },
           );
