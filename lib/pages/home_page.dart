@@ -1,10 +1,13 @@
 import 'package:codigo6_states/pages/register_page.dart';
 import 'package:codigo6_states/providers/example_provider.dart';
 import 'package:codigo6_states/providers/person_provider.dart';
+import 'package:codigo6_states/services/remote/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
+  ApiService apiService = ApiService();
+
   @override
   Widget build(BuildContext context) {
     ExampleProvider exampleProvider =
@@ -38,19 +41,19 @@ class HomePage extends StatelessWidget {
       //     );
       //   },
       // ),
-      body: Consumer<PersonProvider>(
-        builder: (context, provider, _) {
-          return ListView.builder(
-            itemCount: provider.people.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(provider.people[index]),
-                subtitle: Text("Descripción del item"),
-              );
-            },
-          );
-        },
-      ),
+      // body: Consumer<PersonProvider>(
+      //   builder: (context, provider, _) {
+      //     return ListView.builder(
+      //       itemCount: provider.people.length,
+      //       itemBuilder: (context, index) {
+      //         return ListTile(
+      //           title: Text(provider.people[index]),
+      //           subtitle: Text("Descripción del item"),
+      //         );
+      //       },
+      //     );
+      //   },
+      // ),
     );
   }
 }
