@@ -9,8 +9,20 @@ class FirestoreService {
     List<Map> notes = [];
     for (var item in docs) {
       Map note = item.data() as Map;
+      note["id"] = item.id;
       notes.add(note);
     }
+
     return notes;
+  }
+
+  void updateNote(String id) {
+    CollectionReference notesReferences =
+        FirebaseFirestore.instance.collection("notes");
+    notesReferences.doc(id).update(
+      {
+        "status": true,
+      },
+    );
   }
 }

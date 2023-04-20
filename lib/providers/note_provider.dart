@@ -10,4 +10,9 @@ class NoteProvider extends ChangeNotifier {
     notes = await firestoreService.getNotes();
     notifyListeners();
   }
+
+  updateNote(String id) {
+    firestoreService.updateNote(id);
+    getNotes();
+  }
 }
