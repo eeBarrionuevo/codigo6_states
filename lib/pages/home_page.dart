@@ -15,12 +15,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    PostProvider postProvider =
-        Provider.of<PostProvider>(context, listen: false);
-    postProvider.getPosts2();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   ///
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      PostProvider postProvider =
+          Provider.of<PostProvider>(context, listen: false);
+      postProvider.getPosts2();
+    });
   }
 
   @override
@@ -52,7 +51,15 @@ class _HomePageState extends State<HomePage> {
               child: CircularProgressIndicator(),
             );
           }
-          return Text(provider.posts.toString());
+          return ListView.builder(
+            itemCount: provider.posts.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(provider.posts[index]["title"]),
+                subtitle: Text(provider.posts[index]["body"]),
+              );
+            },
+          );
         },
       ),
       // body: Text(postProvider2.posts.toString()),
