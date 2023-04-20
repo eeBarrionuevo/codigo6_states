@@ -11,14 +11,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExampleProvider exampleProvider =
-        Provider.of<ExampleProvider>(context, listen: false);
-
-    PersonProvider personProvider =
-        Provider.of<PersonProvider>(context, listen: false);
-
     PostProvider postProvider =
-        Provider.of<PostProvider>(context, listen: true);
+        Provider.of<PostProvider>(context, listen: false);
+    postProvider.getPosts2();
 
     return Scaffold(
       appBar: AppBar(
@@ -58,15 +53,20 @@ class HomePage extends StatelessWidget {
       //     );
       //   },
       // ),
-      body: FutureBuilder(
-        future: postProvider.getPosts(),
-        builder: (context, snap) {
-          if (snap.hasData) {
-            return Text(snap.data.toString());
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+      // body: FutureBuilder(
+      //   future: postProvider.getPosts(),
+      //   builder: (context, snap) {
+      //     if (snap.hasData) {
+      //       return Text(snap.data.toString());
+      //     }
+      //     return const Center(
+      //       child: CircularProgressIndicator(),
+      //     );
+      //   },
+      // ),
+      body: Consumer<PostProvider>(
+        builder: (context, provider, _) {
+          return Text(provider.posts.toString());
         },
       ),
     );

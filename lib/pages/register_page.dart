@@ -1,5 +1,6 @@
 import 'package:codigo6_states/providers/example_provider.dart';
 import 'package:codigo6_states/providers/person_provider.dart';
+import 'package:codigo6_states/providers/post_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,24 +48,9 @@ class RegisterPage extends StatelessWidget {
             //   context.watch<ExampleProvider>().contador.toString(),
             // ),
 
-            Consumer<ExampleProvider>(
+            Consumer<PostProvider>(
               builder: (context, provider, _) {
-                return Text(
-                  provider.contador.toString(),
-                  style: TextStyle(
-                    fontSize: 30.0,
-                  ),
-                );
-              },
-            ),
-            Consumer<ExampleProvider>(
-              builder: (context, provider, _) {
-                return Text(
-                  provider.contador.toString(),
-                  style: TextStyle(
-                    fontSize: 30.0,
-                  ),
-                );
+                return Text(provider.posts.toString());
               },
             ),
           ],
