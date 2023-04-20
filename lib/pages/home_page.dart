@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codigo6_states/pages/register_page.dart';
 import 'package:codigo6_states/providers/example_provider.dart';
 import 'package:codigo6_states/providers/person_provider.dart';
