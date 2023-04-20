@@ -1,6 +1,7 @@
 import 'package:codigo6_states/pages/register_page.dart';
 import 'package:codigo6_states/providers/example_provider.dart';
 import 'package:codigo6_states/providers/person_provider.dart';
+import 'package:codigo6_states/providers/post_provider.dart';
 import 'package:codigo6_states/services/remote/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,9 @@ class HomePage extends StatelessWidget {
 
     PersonProvider personProvider =
         Provider.of<PersonProvider>(context, listen: false);
+
+    PostProvider postProvider =
+        Provider.of<PostProvider>(context, listen: true);
 
     return Scaffold(
       appBar: AppBar(
@@ -54,6 +58,17 @@ class HomePage extends StatelessWidget {
       //     );
       //   },
       // ),
+      body: FutureBuilder(
+        future: postProvider.getPosts(),
+        builder: (context, snap) {
+          if (snap.hasData) {
+            return Text(snap.data.toString());
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 }
