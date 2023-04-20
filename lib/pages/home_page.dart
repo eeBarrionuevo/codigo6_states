@@ -6,14 +6,28 @@ import 'package:codigo6_states/services/remote/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
-  ApiService apiService = ApiService();
-
+class HomePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
     PostProvider postProvider =
         Provider.of<PostProvider>(context, listen: false);
     postProvider.getPosts2();
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   ///
+    // });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // PostProvider postProvider2 =
+    //     Provider.of<PostProvider>(context, listen: true);
+    // postProvider.getPosts2();
 
     return Scaffold(
       appBar: AppBar(
@@ -31,44 +45,12 @@ class HomePage extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
-      // body: ListView.builder(
-      //   itemCount: personProvider.people.length,
-      //   itemBuilder: (context, index) {
-      //     return ListTile(
-      //       title: Text(personProvider.people[index]),
-      //       subtitle: Text("Descripción del item"),
-      //     );
-      //   },
-      // ),
-      // body: Consumer<PersonProvider>(
-      //   builder: (context, provider, _) {
-      //     return ListView.builder(
-      //       itemCount: provider.people.length,
-      //       itemBuilder: (context, index) {
-      //         return ListTile(
-      //           title: Text(provider.people[index]),
-      //           subtitle: Text("Descripción del item"),
-      //         );
-      //       },
-      //     );
-      //   },
-      // ),
-      // body: FutureBuilder(
-      //   future: postProvider.getPosts(),
-      //   builder: (context, snap) {
-      //     if (snap.hasData) {
-      //       return Text(snap.data.toString());
-      //     }
-      //     return const Center(
-      //       child: CircularProgressIndicator(),
-      //     );
-      //   },
-      // ),
       body: Consumer<PostProvider>(
         builder: (context, provider, _) {
           return Text(provider.posts.toString());
         },
       ),
+      // body: Text(postProvider2.posts.toString()),
     );
   }
 }
