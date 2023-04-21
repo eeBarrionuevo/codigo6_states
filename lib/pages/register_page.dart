@@ -34,12 +34,26 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             BlocBuilder<CounterCubit, CounterState>(
               builder: (BuildContext context, CounterState state) {
-                return Text(
-                  state.toString(),
-                  style: TextStyle(
-                    fontSize: 40,
-                  ),
-                );
+                switch (state.runtimeType) {
+                  case CounterInitState:
+                    int value = (state as CounterInitState).data;
+                    return Text(
+                      value.toString(),
+                      style: TextStyle(
+                        fontSize: 40,
+                      ),
+                    );
+                  case IncrementState:
+                    int value = (state as IncrementState).data;
+                    return Text(
+                      value.toString(),
+                      style: TextStyle(
+                        fontSize: 40,
+                      ),
+                    );
+                  default:
+                    return Center();
+                }
               },
             ),
             ElevatedButton(

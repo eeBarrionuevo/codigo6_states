@@ -23,23 +23,20 @@ class CounterCubit extends Cubit<CounterState> {
   CounterCubit() : super(CounterInitState());
 
   increment() {
-    print(state);
     if (state is CounterInitState) {
-      CounterInitState current = state as CounterInitState;
-      print(current.data);
-      emit(IncrementState(current.data + 1));
+      CounterInitState pepe = state as CounterInitState;
+      emit(IncrementState(pepe.data + 1));
     } else if (state is IncrementState) {
-      // emit(IncrementState(state.));
-      IncrementState curret = state as IncrementState;
-      emit(IncrementState(curret.data + 1));
+      IncrementState manolo = state as IncrementState;
+      emit(IncrementState(manolo.data + 1));
     }
   }
 
   decrement() {
-    print("Decrement");
+    emit(DecrementState(-1));
   }
 
   restart() {
-    print("Restart");
+    emit(CounterInitState());
   }
 }
