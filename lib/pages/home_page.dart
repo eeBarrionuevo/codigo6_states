@@ -2,6 +2,10 @@ import 'package:codigo6_states/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  //HTTP
+  //FIREBASE
+  //BD
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
