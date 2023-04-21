@@ -33,7 +33,16 @@ class CounterCubit extends Cubit<CounterState> {
   }
 
   decrement() {
-    emit(DecrementState(-1));
+    if (state is CounterInitState) {
+      CounterInitState pepe = state as CounterInitState;
+      emit(DecrementState(pepe.data - 1));
+    } else if (state is IncrementState) {
+      IncrementState manolo = state as IncrementState;
+      emit(DecrementState(manolo.data - 1));
+    } else if (state is DecrementState) {
+      DecrementState manolo = state as DecrementState;
+      emit(DecrementState(manolo.data - 1));
+    }
   }
 
   restart() {

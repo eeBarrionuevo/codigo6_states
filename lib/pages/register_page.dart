@@ -34,25 +34,34 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             BlocBuilder<CounterCubit, CounterState>(
               builder: (BuildContext context, CounterState state) {
+                print(state.runtimeType);
                 switch (state.runtimeType) {
                   case CounterInitState:
                     int value = (state as CounterInitState).data;
                     return Text(
                       value.toString(),
-                      style: TextStyle(
-                        fontSize: 40,
+                      style: const TextStyle(
+                        fontSize: 60,
                       ),
                     );
                   case IncrementState:
                     int value = (state as IncrementState).data;
                     return Text(
                       value.toString(),
-                      style: TextStyle(
-                        fontSize: 40,
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                    );
+                  case DecrementState:
+                    int value = (state as DecrementState).data;
+                    return Text(
+                      value.toString(),
+                      style: const TextStyle(
+                        fontSize: 80,
                       ),
                     );
                   default:
-                    return Center();
+                    return const Center();
                 }
               },
             ),
@@ -60,6 +69,15 @@ class _RegisterPageState extends State<RegisterPage> {
               onPressed: () {
                 // registerBloc.addCounter(IncrementEvent(10));
                 context.read<CounterCubit>().increment();
+              },
+              child: const Text(
+                "Registrar",
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // registerBloc.addCounter(IncrementEvent(10));
+                context.read<CounterCubit>().decrement();
               },
               child: const Text(
                 "Registrar",
