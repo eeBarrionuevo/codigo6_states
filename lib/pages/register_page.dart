@@ -51,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                registerBloc.addCounter(RegisterEvent.increment);
+                registerBloc.addCounter(IncrementEvent(10));
               },
               child: const Text(
                 "Registrar",
