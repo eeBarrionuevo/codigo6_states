@@ -32,6 +32,16 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: 12.0,
             ),
+            BlocBuilder<CounterCubit, CounterState>(
+              builder: (BuildContext context, CounterState state) {
+                return Text(
+                  state.toString(),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
+                );
+              },
+            ),
             ElevatedButton(
               onPressed: () {
                 // registerBloc.addCounter(IncrementEvent(10));
