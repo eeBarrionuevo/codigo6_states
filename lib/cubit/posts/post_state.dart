@@ -6,4 +6,7 @@ class PostLoadingState extends PostState {}
 
 class PostErrorState extends PostState {}
 
-class PostSuccedState extends PostState {}
+class PostSuccedState extends PostState {
+  List<Map> posts;
+  PostSuccedState({required this.posts});
+}

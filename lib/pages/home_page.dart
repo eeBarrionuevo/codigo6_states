@@ -1,10 +1,22 @@
+import 'package:codigo6_states/cubit/posts/post_cubit.dart';
+import 'package:codigo6_states/cubit/posts/post_state.dart';
 import 'package:codigo6_states/pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatelessWidget {
-  //HTTP
-  //FIREBASE
-  //BD
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<PostCubit>().getPostsData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +36,10 @@ class HomePage extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text("Nombre del item"),
-            subtitle: Text("Descripción del item"),
-          ),
-          ListTile(
-            title: Text("Nombre del item"),
-            subtitle: Text("Descripción del item"),
-          ),
-        ],
+      body: BlocBuilder<PostCubit, PostState>(
+        builder: (BuildContext context, PostState state) {
+          return Text("Hola");
+        },
       ),
     );
   }

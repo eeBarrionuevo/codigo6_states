@@ -7,7 +7,9 @@ class PostCubit extends Cubit<PostState> {
 
   ApiService apiService = ApiService();
 
-  getPostsData() async {
+  Future<void> getPostsData() async {
+    emit(PostLoadingState());
     List<Map> posts = await apiService.getPosts();
+    emit(PostSuccedState(posts: posts));
   }
 }
