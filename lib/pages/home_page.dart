@@ -29,17 +29,23 @@ class HomePage extends ConsumerWidget {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text("Nombre del item"),
-            subtitle: Text("Descripción del item"),
-          ),
-          ListTile(
-            title: Text("Nombre del item"),
-            subtitle: Text("Descripción del item"),
-          ),
-        ],
+      body: responsePostProvider.when(
+        data: (data) {
+          return ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return Text(data[index]["title"]);
+            },
+          );
+        },
+        error: (error, stackTrace) {
+          return Text("ERROR");
+        },
+        loading: () {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
