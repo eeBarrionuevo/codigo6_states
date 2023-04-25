@@ -1,9 +1,18 @@
 import 'package:codigo6_states/pages/register_page.dart';
+import 'package:codigo6_states/services/remote/api_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatelessWidget {
+final responsePost = FutureProvider((ref) async {
+  ApiService apiService = ref.watch(apiServiceProvider);
+  return apiService.getPosts();
+});
+
+class HomePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final responsePostProvider = ref.watch(responsePost);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
